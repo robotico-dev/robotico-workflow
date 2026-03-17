@@ -1,0 +1,22 @@
+= Robotico.Workflow — Documentation
+:toc: left
+:toclevels: 2
+:sectnums:
+:icons: font
+
+Long-running workflow with state machine, step persistence, and durability. Result-based. Depends on Robotico.Result.
+
+== Quick links
+
+* link:design.adoc[Design] — Workflow vs saga, API contract (IWorkflowState), architecture, durability and resumability, related packages.
+
+== Building the docs
+
+These docs are written in AsciiDoc. To produce HTML (e.g. with Asciidoctor):
+
+----
+asciidoctor docs/index.adoc -o docs/index.html
+asciidoctor docs/design.adoc -o docs/design.html
+----
+
+Or use the AsciiDoc extension in your editor for preview.

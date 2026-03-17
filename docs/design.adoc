@@ -1,0 +1,52 @@
+= Robotico.Workflow — Design
+:toc: left
+:toclevels: 2
+:sectnums:
+:icons: font
+
+This document explains long-running workflows and Robotico.Workflow: state machine, durability/resumability, and how it differs from Robotico.Saga. Integration with other Robotico packages is also covered.
+
+== Workflow vs saga
+
+* *Workflow* — Long-running process with a *state machine*. State is persisted so the workflow can resume after a delay, crash, or human step. No compensation; transitions are forward-only (or defined by the state machine).
+
+* *Saga* — Compensating transactions. When a step fails, prior steps are undone. Robotico.Saga focuses on Execute + Compensate.
+
+Use workflows for multi-step processes where each step advances state; use sagas when you need to roll back previous steps on failure.
+
+== API contract
+
+* *IWorkflowState<TState>* — Represents the current state of a workflow instance.
+** `CurrentState` — The current step or state (e.g. enum, value object). Used by an engine to decide the next transition and to persist for resumability.
+
+Orchestration that uses IWorkflowState typically returns Result from the engine (e.g. "run next step" returns Result). The state type TState is generic (enum, class, or struct).
+
+== Architecture
+
+A workflow engine loads and persists IWorkflowState (e.g. via Robotico.Repository), advances CurrentState on each step, and returns Result for transitions. No compensation; transitions are forward-only. Suitable for long-running processes with delays, human steps, or external triggers.
+
+[source,mermaid]
+----
+flowchart LR
+  E[Workflow Engine] --> I[IWorkflowState]
+  I --> R[Robotico.Repository]
+  E --> Res[Robotico.Resilience]
+  E --> Ev[Robotico.Events]
+----
+
+The engine decides the next transition from CurrentState, executes the step, persists the new state, and optionally emits domain events (Robotico.Events).
+
+== Durability and resumability
+
+Implementations persist CurrentState so that:
+
+* After a crash, the workflow can be resumed from the last persisted state.
+* Delays or human tasks can be supported by storing state and resuming when the trigger fires.
+
+Persistence is not defined in this library; use Robotico.Repository (or another store) to persist workflow instances keyed by workflow id.
+
+== Related packages
+
+* *Robotico.Repository* — Persist workflow state (workflow id, CurrentState, payload) for durability and resumability.
+* *Robotico.Resilience* — Retry step execution or state transitions when a dependency is temporarily unavailable.
+* *Robotico.Events* — Emit domain events when transitioning to a new state or when the workflow completes.

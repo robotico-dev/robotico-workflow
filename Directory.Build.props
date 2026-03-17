@@ -20,6 +20,7 @@
     <Copyright>Copyright © Robotico</Copyright>
     <RepositoryType>git</RepositoryType>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>All</AnalysisMode>
     <PackageId>Robotico.Workflow</PackageId>
     <Title>Robotico.Workflow</Title>
     <Description>Workflow / long-running process: state machine, step persistence, durability. Result-based. Depends on Robotico.Result.</Description>
