@@ -76,10 +76,3 @@ public sealed class WorkflowTests
         Assert.Equal("Running", state.CurrentState);
     }
 }
-
-public enum WorkflowPhase
-{
-    Created,
-    Running,
-    Completed
-}
