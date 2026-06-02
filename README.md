@@ -1,4 +1,6 @@
 # Robotico.Workflow
+[![Woodpecker CI](https://dvalin.robotico.dev/api/badges/robotico/robotico-workflow/status.svg)](https://dvalin.robotico.dev/robotico/robotico-workflow)
+
 
 [![Build](https://github.com/robotico-dev/robotico-workflow-csharp/actions/workflows/publish.yml/badge.svg)](https://github.com/robotico-dev/robotico-workflow-csharp/actions/workflows/publish.yml)
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/download/dotnet/8.0)
