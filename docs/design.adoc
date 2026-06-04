@@ -25,7 +25,7 @@ Orchestration that uses IWorkflowState typically returns Result from the engine 
 
 A workflow engine loads and persists IWorkflowState (e.g. via Robotico.Repository), advances CurrentState on each step, and returns Result for transitions. No compensation; transitions are forward-only. Suitable for long-running processes with delays, human steps, or external triggers.
 
-[source,mermaid]
+[mermaid]
 ----
 flowchart LR
   E[Workflow Engine] --> I[IWorkflowState]
