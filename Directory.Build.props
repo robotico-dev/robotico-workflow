@@ -14,7 +14,7 @@
   <Import Project="$(_RoboticoSharedMsbuildImport)" Condition="'$(_RoboticoSharedMsbuildImport)' != ''" />
 
   <PropertyGroup>
-    <Version>1.0.1</Version>
+    <Version>1.0.3</Version>
     <Product>Robotico.Workflow</Product>
     <PackageId>Robotico.Workflow</PackageId>
     <Title>Robotico.Workflow</Title>
